@@ -6,6 +6,29 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', href='/bootstrap/css/amelia.bootstrap.css')
   body
-    block content
-    script(src='/bootstrap/js/bootstrap.min.js')
+  
+    nav.navbar.navbar-default(role="navigation")
+      .navbar-header
+        button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href="/") Loc8r
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            a(href="/about") About
+    
+    .container
+      block content
+      footer
+        .row
+          .col-xs-12
+            small &copy; Simon Holmes 2014
+
     script(src='/javascripts/jquery-3.3.1.js')
+    script(src='/bootstrap/js/bootstrap.min.js')
+
+    
+
