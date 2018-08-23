@@ -36,7 +36,7 @@ block content
                         .panel-heading 
                             h4.panel-title Map
                         .panel-body 
-                            img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=51.455041,- 0.9690884&zoom=17&size=400x350&sensor=false&markers=51.455041,-0.9690884&scale=2')
+                            img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=#{coords.lat},#{coords.long}&zoom=17&size=400x350&sensor=false&markers=#{coords.lat},#{coords.long}&scale=2')
             .row
                 .panel.panel-primary
                     .panel-heading 
