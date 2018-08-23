@@ -54,7 +54,12 @@ let locationInfo = function (req,resp,next) {
 }
 
 let addReview =  function (req,resp,next) {
-    resp.render('addReview', {title: 'Add Review'})
+    resp.render('addReview', {
+        title: 'Add Review',
+        placeName: 'Honest Burger',
+        authorName: 'Pavel'
+
+    })
 }
 
 module.exports.homeList = homeList;

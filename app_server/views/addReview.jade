@@ -4,13 +4,13 @@ block content
     .page-header 
         .row
             .col-sm-12  
-                h1 Add your review
+                h1 Add your review for #{placeName}  
     
     form.form-horizontal(role='form',action="/location", method="get")
         .form-group
             label.col-md-2.control-label(for="inputName") Name
             .col-md-6
-                input.form-control(type="text", id="inputName", placeholder="Enter name")
+                label.control-label= authorName
         .form-group
             label.col-md-2.control-label(for="inputRating") Rating
             .col-md-2
