@@ -1,41 +1,36 @@
 extends layout
 
+include _includes/mixins
+
 block content
     .row.page-header
-            .col-sm-12  
-                h1 Loc8r 
+        h1= name 
     .row
         .col-sm-8.col-xs-12
             .row
                 .col-sm-6.col-xs-12
                     .row
-                        p 
-                            span.glyphicon.glyphicon-star
-                            span.glyphicon.glyphicon-star 
-                            span.glyphicon.glyphicon-star 
-                            span.glyphicon.glyphicon-star 
-                            span.glyphicon.glyphicon-star-empty
-                        p 125 High street, Reading, RG6 1PS  
+                        p
+                            +outputRating(rating)
+                        p= address
                     .row    
                         .panel.panel-primary
                             .panel-heading 
                                 h4.panel-title Opening hours
                             .panel-body
-                                p Monday - Friday : 07:00am 07:00pm
-                                p Saturday : 08:00am 05:00pm
-                                p Sunday : closed
+                                each hour in hours
+                                    p= hour
+                                
                     .row 
                         .panel.panel-primary
                             .panel-heading 
                                 h4.panel-title Facilities
                             .list-group-item
-                                span.label.label-warning 
-                                    span.glyphicon.glyphicon-ok
-                                    |   Facility1 
-                                &nbsp;
-                                span.label.label-warning 
-                                    span.glyphicon.glyphicon-ok
-                                    |   Facility2 
+                                each facility in facilities
+                                    span.label.label-warning 
+                                        span.glyphicon.glyphicon-ok
+                                        | #{facility}    
+                                    &nbsp;
                 .col-sm-6.col-xs-12.location-map
                     .panel.panel-primary 
                         .panel-heading 
@@ -48,32 +43,15 @@ block content
                         a.btn.btn-default.btn-xs.pull-right(href='/location/review/new') Add review
                         h4.panel-title Customer reviews
                     .panel-body.review-container
-                        .row
-                            .review
-                                .well.well-sm.review-header
-                                    span.glyphicon.glyphicon-star 
-                                    span.glyphicon.glyphicon-star
-                                    span.glyphicon.glyphicon-star 
-                                    span.glyphicon.glyphicon-star
-                                    span.glyphicon.glyphicon-star 
-                                    span.reviewAuthor John Malkovich 
-                                    small.reviewTimestamp 12.05.2018
-                                .col 
-                                    p This is the best place ever! 
-                        .row
-                            .review
-                                .well.well-sm.review-header
-                                    span.glyphicon.glyphicon-star 
-                                    span.glyphicon.glyphicon-star
-                                    span.glyphicon.glyphicon-star 
-                                    span.glyphicon.glyphicon-star
-                                    span.glyphicon.glyphicon-star-empty 
-                                    span.reviewAuthor Jack Rambo 
-                                    small.reviewTimestamp 18.06.2018
-                                .col 
-                                    p Good place. A bit grumpy staff, though.
+                        each review in reviews
+                            .row
+                                .review
+                                    .well.well-sm.review-header
+                                        +outputRating(review.rating)
+                                        span.reviewAuthor= review.name
+                                        small.reviewTimestamp= review.date
+                                    .col 
+                                        p= review.text 
         .col-sm-4.col-xs-12
-            p.lead 
-            | Looking for wifi and a seat? Loc8r helps you find places to work when out and about. 
-            | Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.
+            p.lead= sidebar
   
