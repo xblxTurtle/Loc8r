@@ -35,6 +35,10 @@ let locationInfo = function (req,resp,next) {
         address: "125 High street, Reading, RG6 1PS",
         facilities: ["toilet", "tables", "heating"],
         hours: ["Monday - Friday : 07:00am 07:00pm", "Saturday : 08:00am 05:00pm", "Sunday : Closed"],
+        coords: {
+            lat: 51.455041,
+            long: - 0.9690884
+        },
         reviews: [
             {
                 rating: 5,
