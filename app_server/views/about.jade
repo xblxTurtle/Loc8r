@@ -4,10 +4,10 @@ block content
     .page-header 
         .row
             .col-sm-12  
-                h1 About Lock8r
+                h1= title
 
     .row
         .col-md-6
-            p Some text goes here. 
-            br
-            p Some additional text goes here
+            each paragraph in paragraphs
+                p= paragraph
+                br
