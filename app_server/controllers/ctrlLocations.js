@@ -36,8 +36,8 @@ let locationInfo = function (req,resp,next) {
         facilities: ["toilet", "tables", "heating"],
         hours: ["Monday - Friday : 07:00am 07:00pm", "Saturday : 08:00am 05:00pm", "Sunday : Closed"],
         coords: {
-            lat: 51.455041,
-            long: - 0.9690884
+            lat: 51.634825,
+            long: -0.091764
         },
         reviews: [
             {
