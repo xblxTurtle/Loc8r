@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-let reviewSchema = mongoose.Schema({
+let reviewSchema = new mongoose.Schema({
     rating: {
         type: Number, 
         required: true,
@@ -34,3 +34,8 @@ let locationSchema = new mongoose.Schema({
 })
 
 mongoose.model('location', locationSchema);
+
+
+
+
+
