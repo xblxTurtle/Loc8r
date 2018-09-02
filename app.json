@@ -1,7 +1,6 @@
 {
   "name": "Loc8r",
   "scripts": {
-    "postdeploy": "HOST_URL='$HEROKU_APP_NAME.herokuapp.com'"
   },
   "env": {
     "MONGODB_URI": {
