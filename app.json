@@ -6,9 +6,6 @@
   "env": {
     "MONGODB_URI": {
       "required": true
-    },
-    "WEB_URL": {
-      "required": true
     }
   },
   "formation": {
