@@ -1,3 +1,5 @@
+var request = require('request')
+
 let homeList = function (req,resp,next) {
     resp.render('index', 
     {

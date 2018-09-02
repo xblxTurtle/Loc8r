@@ -1,6 +1,11 @@
 var mongoose = require('mongoose');
 var locationModel = mongoose.model('location');
 
+var serverUrl = 'http://localhost:3000/api';
+if (process.env.NODE_ENV === 'production') {
+    serverUrl = '';
+}
+
 var sendJsonResponse = function (res,status,content) {
     res.status = status;
     res.json(content);
