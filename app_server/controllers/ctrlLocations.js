@@ -1,7 +1,41 @@
 var request = require('request')
 
+var serverUrl = 'http://localhost:3000';
+if (process.env.NODE_ENV === 'production') {
+    serverUrl = 'https://'+process.env.HEROKU_APP_NAME+".herokuapp.com";
+}
+
 let homeList = function (req,resp,next) {
-    resp.render('index', 
+
+    let options = {
+        url: serverUrl + '/api/locations',
+        method: 'GET'
+    }
+
+    request(options, function(error, response, body) {
+        let message;
+        if (error) {
+            resp.render('error', error);
+            return;
+        }
+        if ((response.statusCode !== 200)) {
+            message = "API lookup error";
+            body = '[]';
+        }
+        let data = {
+            title: 'Loc8r - find a place to work with wifi',
+            pageHeader: {
+                title: 'Loc8r',
+                strapline: 'Find places to work with wifi near you!'
+            },
+            sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.",
+            locations: JSON.parse(body),
+            errormessage: message
+        }
+        resp.render('index', data);
+    })
+
+    /*resp.render('index', 
     {
         title: 'Loc8r - find a place to work with wifi',
         pageHeader: {
@@ -25,7 +59,7 @@ let homeList = function (req,resp,next) {
                 facilities: ["tables"]
             }
         ]
-    })
+    })*/
 }
 
 let locationInfo = function (req,resp,next) {

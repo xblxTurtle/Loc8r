@@ -1,13 +1,8 @@
 var mongoose = require('mongoose');
 var locationModel = mongoose.model('location');
 
-var serverUrl = 'http://localhost:3000';
-if (process.env.NODE_ENV === 'production') {
-    serverUrl = 'https://'+process.env.HEROKU_APP_NAME+'.herokuapp.com';
-}
-
 var sendJsonResponse = function (res,status,content) {
-    res.status = status;
+    res.status(status);
     res.json(content);
 }
 
