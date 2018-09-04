@@ -18,7 +18,7 @@ block content
                             .panel-heading 
                                 h4.panel-title Opening hours
                             .panel-body
-                                each hour in hours
+                                each hour in openingHours
                                     p= hour
                                 
                     .row 
@@ -49,7 +49,8 @@ block content
                                     .well.well-sm.review-header
                                         +outputRating(review.rating)
                                         span.reviewAuthor= review.name
-                                        small.reviewTimestamp= review.date
+                                        small.reviewTimestamp 
+                                            +formatDate(review.date)
                                     .col 
                                         p= review.text 
         .col-sm-4.col-xs-12

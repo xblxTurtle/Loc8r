@@ -11,7 +11,7 @@ block content
     .col-sm-8.col-xs-12.list-group
       each location in locations
         .row.list-group-item
-          a(href='/location')= location.name
+          a(href='/location/'+location._id)= location.name
           &nbsp;&nbsp;&nbsp;&nbsp;
           +outputRating(location.rating)
           span.badge.pull-right= location.distance + 'm'

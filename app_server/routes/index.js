@@ -13,7 +13,7 @@ router.get('/about', ctrlOthers.about);
 router.get('/location/review/new', ctrlLocations.addReview)
 
 /* GET Location page. */
-router.get('/location', ctrlLocations.locationInfo)
+router.get('/location/:locationid', ctrlLocations.locationInfo)
 
 /* GET Test page. */    
 router.get('/test', function(req,resp,next) {resp.render('test', {title:'Test page'});});

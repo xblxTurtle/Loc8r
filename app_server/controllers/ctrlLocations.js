@@ -19,7 +19,7 @@ let homeList = function (req,resp,next) {
             return;
         }
         if ((response.statusCode !== 200)) {
-            message = "API lookup error";
+            message = "API lookup error \n" + body;
             body = '[]';
         }
         let data = {
@@ -63,33 +63,33 @@ let homeList = function (req,resp,next) {
 }
 
 let locationInfo = function (req,resp,next) {
-    resp.render('location', {
-        title: 'Location',
-        name: "Honest Burger",
-        rating: 3,
-        distance: 100,
-        address: "125 High street, Reading, RG6 1PS",
-        facilities: ["toilet", "tables", "heating"],
-        hours: ["Monday - Friday : 07:00am 07:00pm", "Saturday : 08:00am 05:00pm", "Sunday : Closed"],
-        coords: {
-            lat: 51.634825,
-            long: -0.091764
-        },
-        reviews: [
-            {
-                rating: 5,
-                name: "John Malkovich",
-                date: "13/01/2018",
-                text: "This is the best place ever!"
-            },
-            {
-                rating: 2,
-                name: "Jack Rambo",
-                date: "01/10/2018",
-                text: "Nice place. Food is not ideal, though."
-            }
-        ],
-        sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for."
+
+    let options = {
+        url: serverUrl + '/api/locations/' + req.params.locationid,
+        method: 'GET'
+    }
+
+    request(options, function(error, response, body) {
+        let message;
+        if (error) {
+            resp.render('error', error);
+            return;
+        }
+        if ((response.statusCode !== 200)) {
+            resp.render('generic-text', {
+                title : 'API lookup error',
+                text : body,
+                status: response.statusCode
+              });
+            return;
+        }
+        let data = JSON.parse(body)
+        data.message = message;
+        data.distance = 100;
+        data.title = 'Location';
+        data.sidebar = "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.";
+        
+        resp.render('location', data);
     })
 }
 
