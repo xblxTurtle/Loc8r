@@ -5,6 +5,9 @@
   "env": {
     "MONGODB_URI": {
       "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "required": true
     }
   },
   "formation": {
