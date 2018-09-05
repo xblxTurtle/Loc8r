@@ -79,7 +79,6 @@ var reviewsCreate = function (req,res) {
                 name: req.body.name,
                 text: req.body.text 
             }
-           
             addReview(res, location, newReview)
         })
     } else sendJsonResponse(res,404,{'message':'No locationId provided'});

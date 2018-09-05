@@ -136,7 +136,6 @@ let doAddReview = function (req, resp, next) {
                 resp.redirect("/location/review/new/"+ req.params.locationid +"?err=val");
             }
             if ((response.statusCode !== 201)) {
-                console.log(body);
                 resp.render('generic-text', {
                     title : 'API lookup error',
                     text : body,
