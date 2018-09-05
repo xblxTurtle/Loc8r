@@ -10,7 +10,10 @@ router.get('/', ctrlLocations.homeList);
 router.get('/about', ctrlOthers.about);
 
 /* GET Add new review page. */
-router.get('/location/review/new', ctrlLocations.addReview)
+router.get('/location/review/new/:locationid', ctrlLocations.addReview)
+
+/* POST Send new review page. */
+router.post('/location/review/new/:locationid', ctrlLocations.doAddReview)
 
 /* GET Location page. */
 router.get('/location/:locationid', ctrlLocations.locationInfo)

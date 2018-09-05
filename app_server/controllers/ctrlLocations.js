@@ -62,15 +62,14 @@ let homeList = function (req,resp,next) {
     })*/
 }
 
-let locationInfo = function (req,resp,next) {
-
+processLocationInfo = function (req, resp, renderPage) {
     let options = {
         url: serverUrl + '/api/locations/' + req.params.locationid,
         method: 'GET'
     }
 
     request(options, function(error, response, body) {
-        let message;
+        
         if (error) {
             resp.render('error', error);
             return;
@@ -83,25 +82,75 @@ let locationInfo = function (req,resp,next) {
               });
             return;
         }
-        let data = JSON.parse(body)
-        data.message = message;
-        data.distance = 100;
-        data.title = 'Location';
-        data.sidebar = "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.";
         
-        resp.render('location', data);
+        let data = JSON.parse(body);
+        data.distance = 100;
+        
+        renderPage(req, resp, data)
     })
 }
 
-let addReview =  function (req,resp,next) {
-    resp.render('addReview', {
-        title: 'Add Review',
-        placeName: 'Honest Burger',
-        authorName: 'Pavel'
+let renderLocationInfoPage = function (req, resp, data) {
+    data.title = 'Location';
+    data.sidebar = "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.";
+   
+    resp.render('location', data);
+}
 
-    })
+let locationInfo = function (req,resp,next) {
+    processLocationInfo(req,resp, renderLocationInfoPage)
+}
+
+let renderAddReviewPage = function (req, resp, data) {
+    data.title = 'Add Review';
+    data.error = req.query.err;
+    resp.render('addReview', data);
+}
+
+let addReview =  function (req,resp,next) {
+    processLocationInfo(req,resp, renderAddReviewPage)   
+}
+
+let doAddReview = function (req, resp, next) {
+    let postData = {
+        rating: parseInt(req.body.rating),
+        name: req.body.name,
+        text: req.body.review
+    };
+    let options = {
+        url: serverUrl + '/api/locations/'+req.params.locationid+'/reviews/',
+        method: 'POST',
+        json: postData
+    }
+    
+    if (!postData.rating || !postData.name || !postData.text) {
+        resp.redirect("/location/review/new/"+ req.params.locationid +"?err=val");
+    }
+    else {
+        request(options, function(error, response, body) {
+            if (error) {
+                resp.render('error', error);
+                return;
+            }
+            if (response.statusCode === 400 && body.name && body.name === "ValidationError") {
+                resp.redirect("/location/review/new/"+ req.params.locationid +"?err=val");
+            }
+            if ((response.statusCode !== 201)) {
+                console.log(body);
+                resp.render('generic-text', {
+                    title : 'API lookup error',
+                    text : body,
+                    status: response.statusCode
+                });
+                return;
+            }
+            resp.redirect('/location/' + req.params.locationid);
+
+        })
+    }       
 }
 
 module.exports.homeList = homeList;
 module.exports.locationInfo = locationInfo;
 module.exports.addReview = addReview;
+module.exports.doAddReview = doAddReview;

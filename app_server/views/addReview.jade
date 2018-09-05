@@ -4,27 +4,29 @@ block content
     .page-header 
         .row
             .col-sm-12  
-                h1 Add your review for #{placeName}  
-    
-    form.form-horizontal(role='form',action="/location", method="get")
+                h1 Add your review for #{name}  
+
+    form#addReview.form-horizontal(role='form',action="/location/review/new/#{_id}", method="post")
+        - if (error == "val")
+            .alert.alert-danger(role="alert") All fields required, please try again
         .form-group
-            label.col-md-2.control-label(for="inputName") Name
+            label.col-md-2.control-label(for="name") Name
             .col-md-6
-                label.control-label= authorName
+                input#name.form-control(placeholder="Enter name")
         .form-group
-            label.col-md-2.control-label(for="inputRating") Rating
+            label.col-md-2.control-label(for="rating") Rating
             .col-md-2
                 .btn-group
-                    select#inputRating.form-control.input-sm(name="rating")
+                    select#rating.form-control.input-sm
                         option 5
                         option 4
                         option 3
                         option 2
                         option 1
         .form-group
-            label.col-md-2.control-label(for="inputReview") Review
+            label.col-md-2.control-label(for="review") Review
             .col-md-6
-                textarea.form-control(rows="5", id="inputReview", placeholder="Enter review")
+                textarea#review.form-control(rows="5", placeholder="Enter review")
         .form-group
             .col-md-offset-2.col-md-2
                 button.btn.btn-default(type="submit") Add my review

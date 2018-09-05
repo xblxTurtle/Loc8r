@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var locationModel = mongoose.model('location');
 
 var sendJsonResponse = function (res,status,content) {
-    res.status = status;
+    res.status(status);
     res.json(content);
 }
 
@@ -79,6 +79,7 @@ var reviewsCreate = function (req,res) {
                 name: req.body.name,
                 text: req.body.text 
             }
+           
             addReview(res, location, newReview)
         })
     } else sendJsonResponse(res,404,{'message':'No locationId provided'});
