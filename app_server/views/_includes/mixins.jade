@@ -3,3 +3,9 @@ mixin outputRating(rating)
     span.glyphicon.glyphicon-star
   - for( i=0;i<(5-rating);i++)
     span.glyphicon.glyphicon-star-empty
+
+mixin formatDate(dateString)
+    -let date = new Date(dateString);
+    -var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
+    -let newDate = date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear();
+    =newDate

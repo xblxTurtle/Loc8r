@@ -7,9 +7,9 @@ let reviewSchema = new mongoose.Schema({
         max: 5, 
         min: 0
     },
-    name: String,
+    name: {required: true, type: String},
     date: {type: Date, "default": Date.now},
-    text: String
+    text: {required: true, type: String}
 });
 
 let locationSchema = new mongoose.Schema({
